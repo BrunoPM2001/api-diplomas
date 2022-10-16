@@ -1,0 +1,23 @@
+{
+  "name": "api-diplomas",
+  "version": "1.0.0",
+  "description": "Aplicación backend para las necesidades del sistema secundario de padrones y generación de diplomas.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Bruno P.M.",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
