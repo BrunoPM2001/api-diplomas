@@ -1,26 +1,32 @@
-import fs from 'fs'
 import { promisify } from 'util'
-import { getDataFromExcel, generatePdf } from '../utils/generatePdf.js'
+import fs from 'fs'
+import { deleteEmptyRows, getDataFromExcel, generatePdf } from '../utils/generatePdf.js'
 
 const unlinkAsync = promisify(fs.unlink)
 const ctrl = {}
 
-ctrl.generatePadron = async (req, res) => {
+ctrl.previsualizarDiplomaSegunPadron = async (req, res) => {
   try {
+    const file = req.file
+    //  Verificar que el archivo se haya cargado
     if (file == undefined) {
       res.json({ message: "Fail", detail: "No se ha seleccionado ningún archivo" })
     } else {
+      //  Obtener el archivo subido y la data
+      await deleteEmptyRows(req.file.path)
       const data = await getDataFromExcel(req.file.path)
-      await generatePdf(data)
-      //  Eliminar archivo excel del servidor
+      //  Eliminar archivo del servidor
       await unlinkAsync(req.file.path)
-      res.json({ message: "Success", detail: "Diploma generado", ruta: "http..." })
+      //  Cabecera de la respuesta y generación del pdf
+      res.writeHead(200, {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename=diploma.pdf'
+      })
+      generatePdf(data[0], res)
     }
-    await unlinkAsync(req.file.path)
   } catch (e) {
     res.json({ message: "Fail", detail: "Exception" })
   }
-  res.json({ message: "Method" })
 }
 
 export default ctrl
