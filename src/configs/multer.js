@@ -1,15 +1,15 @@
 import multer from 'multer'
 
 const storage = multer.diskStorage({
-  destination: "/temp/xlsx",
-  filename: function (req, file, cb) {
+  destination: "public/tmpFiles",
+  filename: (req, file, cb) => {
     cb(null, 'padron.xlsx')
   }
 })
 
 const uploadConfig = multer({
   storage: storage,
-  fileFilter: function (req, file, cb) {
+  fileFilter: (req, file, cb) => {
     if (file.mimetype == "application/vnd.ms-excel" || file.mimetype == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
       cb(null, true) 
     } else {
