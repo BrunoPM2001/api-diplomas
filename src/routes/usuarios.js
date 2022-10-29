@@ -12,6 +12,8 @@ router.put('/update', ctrl.update)
 
 router.delete('/delete', ctrl.delete)
 
-router.delete('/changePass', ctrl.changePassword)
+router.put('/changePass', ctrl.changePassword)
+
+router.put('/login', ctrl.login)
 
 export default router
