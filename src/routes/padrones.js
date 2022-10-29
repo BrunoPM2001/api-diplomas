@@ -4,6 +4,6 @@ import controller from '../controllers/padrones.controller.js'
 
 const route = Router()
 
-route.post("/previzualizarDiplomaSegunPadron", upload, controller.previsualizarDiplomaSegunPadron())
+route.post("/previzualizarDiplomaSegunPadron", upload, controller.previsualizarDiplomaSegunPadron)
 
 export default route
