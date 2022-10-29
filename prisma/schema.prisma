@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuarios {
+  dni       Int   @id
+  apellidos String @db.VarChar(50)
+  nombres   String @db.VarChar(50)
+  password  String @db.VarChar(255)
+  cargo     Cargos
+  diplomas  Diplomas[]
+}
+
+model Diplomas  {
+  registro          String @id
+  dniUsuario        Int
+  codigoEstudiante  Int
+  grado             String @db.VarChar(30)
+  facultad          String @db.VarChar(60)
+  Usuario           Usuarios @relation(fields: [dniUsuario], references: [dni])
+}
+
+enum Cargos {
+  ADMIN
+  GENERADOR
+}
