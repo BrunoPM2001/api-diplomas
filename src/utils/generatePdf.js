@@ -50,14 +50,14 @@ const generatePdf = (data, res) => {
   } = data
   
   //  Generación del PDF del diploma
-  const doc = new PDF()
+  const doc = new PDF({ size: 'A4' })
   doc.pipe(res)
 
   //  Cara delantera
-  doc.moveDown(15)
+  doc.moveDown(21.5)
     //  Fecha y número de resolución de consejo universitario
     doc
-      .font('Times-Bold', 13)
+      .font('public/fonts/upcli.ttf', 16)
       .text(FEC_RESO_CU.split('/')[0] + ' DE ' + 
             getMonth(FEC_RESO_CU.split('/')[1]) + ' DEL ' + 
             FEC_RESO_CU.split('/')[2] +
@@ -65,38 +65,38 @@ const generatePdf = (data, res) => {
         {
           align: 'right'
         })
-      .moveDown(3.75)
+      .moveDown(1)
     //  Tipo de grado (bachiller, título, maestría, etc)
     doc
-      .font('Times-Bold', 13)
+      .font('public/fonts/upcli.ttf', 13)
       .text(GRAD_TITU, {
         align: 'center'
       })
       .moveDown(1.5)
     //  Denominación del grado
     doc
-      .font('Times-Bold', 13)
+      .font('public/fonts/upcli.ttf', 13)
       .text(DEN_GRAD, {
         align: 'center'
       })
       .moveDown(1.5)
     //  Datos del egresado
     doc
-      .font('Times-Bold', 13)
+      .font('public/fonts/upcli.ttf', 13)
       .text(APEPAT + ' ' + APEMAT + ' ' + NOMBRE, {
         align: 'center'
       })
       .moveDown(2.75)
     //  Facultad (en caso de que no sea posgrado)
     doc
-      .font('Times-Bold', 13)
+      .font('public/fonts/upcli.ttf', 13)
       .text(FAC_NOM, {
         align: 'center'
       })
       .moveDown(1.5)
     //  Consejo de facultad o escuela, las posiciones de los valores de las fechas varían
     doc
-      .font('Times-Bold', 13)
+      .font('public/fonts/upcli.ttf', 13)
       .text(F_FEC_CON_FAC_ESC.split('/')[0] + ' DE ' +
             getMonth(F_FEC_CON_FAC_ESC.split('/')[1]) + ' DEL ' +
             F_FEC_CON_FAC_ESC.split('/')[2], 110, 522)
