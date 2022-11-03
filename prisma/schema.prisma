@@ -16,13 +16,39 @@ model Usuarios {
   diplomas  Diplomas[]
 }
 
-model Diplomas  {
+model Diplomas {
   registro          String @id
   dniUsuario        Int
+  dniPadron         Int
   codigoEstudiante  Int
   grado             String @db.VarChar(30)
   facultad          String @db.VarChar(60)
   Usuario           Usuarios @relation(fields: [dniUsuario], references: [dni])
+}
+
+model Padrones {
+  REG_REGISTRO        String @id
+  FEC_RESO_CU          String
+  RESO_NUM            String
+  DEN_GRAD            String
+  APEPAT              String
+  APEMAT              String
+  NOMBRE              String
+  FAC_NOM             String
+  F_FEC_CON_FAC_ESC   String
+  DIPL_FEC            String
+  COD_UNIV            String
+  DOCU_TIP            String
+  DOCU_NUM            String
+  ABRE_GYT            String
+  MOD_OBT             String
+  MOD_EST             String
+  RESO_FEC            String
+  DIPL_TIP_EMI        String
+  REG_LIBRO           String
+  REG_FOLIO           String
+  COD_ALU             String
+  dniAct              Int
 }
 
 enum Cargos {
