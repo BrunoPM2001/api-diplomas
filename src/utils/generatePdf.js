@@ -38,7 +38,6 @@ const generatePdf = (data, res) => {
   const {
     RESO_NUM,
     FEC_RESO_CU,
-    GRAD_TITU,
     MOD_OBT,
     DEN_GRAD,
     APEPAT,
@@ -57,6 +56,7 @@ const generatePdf = (data, res) => {
   //  Cara delantera
   doc.addPage({ margin: 55 })
 //  doc.image('public/formato.jpg', 0, 0, { width: doc.page.width, height: doc.page.height })
+  doc.image('public/formato_vacio.jpg', 0, 0, { width: doc.page.width, height: doc.page.height })
   doc.moveDown(21)
     //  Fecha y número de resolución de consejo universitario
     doc
@@ -72,7 +72,7 @@ const generatePdf = (data, res) => {
     //  Tipo de grado (bachiller, título, maestría, etc)
     doc
       .font('public/fonts/upcli.ttf', 23)
-      .text(GRAD_TITU, {
+      .text(DEN_GRAD, {
         align: 'center'
       })
       .moveDown(0.1)
