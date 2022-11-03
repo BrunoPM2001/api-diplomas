@@ -50,14 +50,17 @@ const generatePdf = (data, res) => {
   } = data
   
   //  Generación del PDF del diploma
-  const doc = new PDF({ size: 'A4' })
+  const doc = new PDF({ size: 'A4', autoFirstPage: false })
+
   doc.pipe(res)
 
   //  Cara delantera
-  doc.moveDown(21.5)
+  doc.addPage({ margin: 55 })
+//  doc.image('public/formato.jpg', 0, 0, { width: doc.page.width, height: doc.page.height })
+  doc.moveDown(21)
     //  Fecha y número de resolución de consejo universitario
     doc
-      .font('public/fonts/upcli.ttf', 16)
+      .font('public/fonts/upcli.ttf', 18)
       .text(FEC_RESO_CU.split('/')[0] + ' DE ' + 
             getMonth(FEC_RESO_CU.split('/')[1]) + ' DEL ' + 
             FEC_RESO_CU.split('/')[2] +
@@ -65,47 +68,48 @@ const generatePdf = (data, res) => {
         {
           align: 'right'
         })
-      .moveDown(1)
+      .moveDown(0.5)
     //  Tipo de grado (bachiller, título, maestría, etc)
     doc
-      .font('public/fonts/upcli.ttf', 13)
+      .font('public/fonts/upcli.ttf', 23)
       .text(GRAD_TITU, {
         align: 'center'
       })
-      .moveDown(1.5)
+      .moveDown(0.1)
     //  Denominación del grado
     doc
-      .font('public/fonts/upcli.ttf', 13)
+      .font('public/fonts/upcli.ttf', 23)
       .text(DEN_GRAD, {
         align: 'center'
       })
-      .moveDown(1.5)
+      .moveDown(0.65)
     //  Datos del egresado
     doc
-      .font('public/fonts/upcli.ttf', 13)
+      .font('public/fonts/upcli.ttf', 28)
       .text(APEPAT + ' ' + APEMAT + ' ' + NOMBRE, {
         align: 'center'
       })
-      .moveDown(2.75)
+      .moveDown(2.3)
     //  Facultad (en caso de que no sea posgrado)
     doc
-      .font('public/fonts/upcli.ttf', 13)
+      .font('public/fonts/upcli.ttf', 23)
       .text(FAC_NOM, {
         align: 'center'
       })
       .moveDown(1.5)
     //  Consejo de facultad o escuela, las posiciones de los valores de las fechas varían
     doc
-      .font('public/fonts/upcli.ttf', 13)
+      .font('public/fonts/upcli.ttf', 18)
       .text(F_FEC_CON_FAC_ESC.split('/')[0] + ' DE ' +
             getMonth(F_FEC_CON_FAC_ESC.split('/')[1]) + ' DEL ' +
-            F_FEC_CON_FAC_ESC.split('/')[2], 110, 522)
+            F_FEC_CON_FAC_ESC.split('/')[2], 105, 544)
     //  Fecha del diploma, posición variada
     doc
-      .text(DIPL_FEC.split('/')[0], 300, 597)
-      .text(getMonth(DIPL_FEC.split('/')[1]), 300, 597)
-      .text(DIPL_FEC.split('/')[2], 300, 597)
+      .text(DIPL_FEC.split('/')[0] + ' DE ' + 
+            getMonth(DIPL_FEC.split('/')[1]) + ' DEL ' +
+            DIPL_FEC.split('/')[2], 265, 607)
 
+  //  Fin del documento
   doc.end()
 }
 
