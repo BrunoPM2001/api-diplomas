@@ -10,15 +10,14 @@ router.get("/getOne", controller.getOne)
 
 router.post("/generateFromExcel", upload, controller.generate)
 
-//  no usar por el momento
-router.post("/createPadron", )
-
-router.put("/updatePadron", )
+router.put("/update", controller.update)
 
 router.delete("/deletePadron", )
 
 router.post("/loadPadron", upload)
 
 router.post("/previsualizarDiplomaSegunPadron", upload, controller.previsualizarDiplomaSegunPadron)
+
+router.post("/previsualizarDiploma", controller.previsualizarDiploma)
 
 export default router
