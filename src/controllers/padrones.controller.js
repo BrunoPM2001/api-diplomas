@@ -67,8 +67,52 @@ ctrl.generate = (req, res) => {
             data: newData,
             skipDuplicates: true
           })
-          res.json({ message: "Success", detail: "Se han registrado " + padrones.count + " nuevos padrones"  })
+          res.json({ message: "Success", detail: "Se han registrado " + padrones.count + " nuevos padrones" })
         }
+      }
+    })
+  } catch (e) {
+    res.json({ message: "Fail", detail: "Exception" })
+  }
+}
+
+ctrl.update = (req, res) => {
+  try {
+    jwt.verify(req.header("Authorization"), process.env.JWT_KEY, async (error, user) => {
+      if (error) {
+        res.json({ message: "Fail", detail: "Token inválido" })
+      } else {
+        const {
+          REG_REGISTRO,
+          FEC_RESO_CU,
+          RESO_NUM,
+          DEN_GRAD,
+          APEPAT,
+          APEMAT,
+          NOMBRE,
+          FAC_NOM,
+          F_FEC_CON_FAC_ESC,
+          DIPL_FEC,
+          COD_UNIV,
+          DOCU_TIP,
+          DOCU_NUM,
+          ABRE_GYT,
+          MOD_OBT,
+          MOD_EST,
+          RESO_FEC,
+          DIPL_TIP_EMI,
+          REG_LIBRO,
+          COD_ALU,
+          dniAct
+        } = req.body
+        const { registro } = req.query
+        await prisma.padrones.update({
+          where: {
+            REG_REGISTRO: registro
+          },
+          data: req.body
+        })
+        res.json({ message: "Success", detail: "Se ha actualizado el padrón" })
       }
     })
   } catch (e) {
@@ -94,6 +138,33 @@ ctrl.previsualizarDiplomaSegunPadron = async (req, res) => {
       })
       generatePdf(data[0], res)
     }
+  } catch (e) {
+    res.json({ message: "Fail", detail: "Exception" })
+  }
+}
+
+ctrl.previsualizarDiploma = async (req, res) => {
+  try {
+    jwt.verify(req.header("Authorization"), process.env.JWT_KEY, async (error, user) => {
+      if (error) {
+        res.json({ message: "Fail", detail: "Token inválido" })
+      } else {
+        const {
+          registro
+        } = req.query
+        const padron = await prisma.padrones.findUnique({
+          where: {
+            REG_REGISTRO: registro
+          }
+        })
+        //  Cabecera de la respuesta y generación del pdf
+        res.writeHead(200, {
+          'Content-Type': 'application/pdf',
+          'Content-Disposition': 'attachment; filename=diploma.pdf'
+        })
+        generatePdf(padron, res)
+      }
+    })
   } catch (e) {
     res.json({ message: "Fail", detail: "Exception" })
   }
