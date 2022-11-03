@@ -20,9 +20,9 @@ const uploadConfig = multer({
 
 const upload = (req, res, next) => {
   try {
-    uploadConfig(res, (err) => {
+    uploadConfig(req, res, (err) => {
       if (err) {
-        res.json({ message: "Fail", detail: "Error en la carga del padrón." })
+        res.json({ message: "Fail", detail: "Error en la carga del padrón" })
       } else {
         next()
       }
