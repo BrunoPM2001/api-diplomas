@@ -12,7 +12,7 @@ router.post("/generateFromExcel", upload, controller.generate)
 
 router.put("/update", controller.update)
 
-router.delete("/deletePadron", )
+router.delete("/deletePadron", controller.deleteOne)
 
 router.post("/loadPadron", upload)
 
