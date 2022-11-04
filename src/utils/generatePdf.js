@@ -31,9 +31,21 @@ const getDataFromExcel = async (path) => {
   return excelData
 }
 
-const generatePdf = (data, res) => {
-  //  Cabecera de la respuesta para generar un pdf
+const printGradTit = (data) => {
+  if (data.includes("BACHILLER")) {
+    return "GRADO ACADÉMICO DE BACHILLER UNIVERSITARIO en"
+  } else if (data.includes("MAESTRIA")) {
+    return "GRADO ACADÉMICO DE MAESTRO en"
+  } else {
+    return "GRADO"
+  }
+}
 
+const printEst1 = (data) => {
+  return (data.split("EN ")[1])
+}
+
+const generatePdf = (data, res, prev) => {
   //  Datos a usar en el diploma
   const {
     RESO_NUM,
@@ -56,7 +68,12 @@ const generatePdf = (data, res) => {
   //  Cara delantera
   doc.addPage({ margin: 55 })
 //  doc.image('public/formato.jpg', 0, 0, { width: doc.page.width, height: doc.page.height })
-  doc.image('public/formato_vacio.jpg', 0, 0, { width: doc.page.width, height: doc.page.height })
+//  doc.image('public/formato_vacio.jpg', 0, 0, { width: doc.page.width, height: doc.page.height })
+
+  if (prev == true) {
+//    doc.image('public/formato.jpg', 0, 0, { width: doc.page.width, height: doc.page.height })
+  }
+
   doc.moveDown(21)
     //  Fecha y número de resolución de consejo universitario
     doc
@@ -72,24 +89,29 @@ const generatePdf = (data, res) => {
     //  Tipo de grado (bachiller, título, maestría, etc)
     doc
       .font('public/fonts/upcli.ttf', 23)
-      .text(DEN_GRAD, {
+      .text(printGradTit(DEN_GRAD), {
         align: 'center'
       })
       .moveDown(0.1)
     //  Denominación del grado
     doc
       .font('public/fonts/upcli.ttf', 23)
-      .text(DEN_GRAD, {
+      .text(printEst1(DEN_GRAD), {
         align: 'center'
       })
       .moveDown(0.65)
     //  Datos del egresado
     doc
       .font('public/fonts/upcli.ttf', 28)
-      .text(APEPAT + ' ' + APEMAT + ' ' + NOMBRE, {
+      .text(APEPAT + ' ' + APEMAT, {
         align: 'center'
       })
-      .moveDown(2.3)
+      .moveDown(-0.1)
+    doc
+      .text(NOMBRE, {
+        align: 'center'
+      })
+      .moveDown(1.4)
     //  Facultad (en caso de que no sea posgrado)
     doc
       .font('public/fonts/upcli.ttf', 23)
