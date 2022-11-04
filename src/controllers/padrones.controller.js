@@ -119,6 +119,33 @@ ctrl.update = (req, res) => {
     res.json({ message: "Fail", detail: "Exception" })
   }
 }
+
+ctrl.deleteOne = (req, res) => {
+  try {
+    //  Validar token (si está logeado)
+    jwt.verify(req.header("Authorization"), process.env.JWT_KEY, async (error, user) => {
+      if (error) {
+        res.json({ message: "Fail", detail: "Token inválido" })
+      } else {
+        //  Validar que sea de cargo ADMIN
+        if (user.cargo == "ADMIN") {
+          const { registro } = req.query
+          await prisma.padrones.delete({
+            where: {
+              REG_REGISTRO: registro
+            }
+          })
+          res.json({ message: "Success", detail: "Padrón eliminado correctamente" })
+        } else {
+          res.json({ message: "Fail", detail: "No tiene permisos para realizar esta acción" })
+        }
+      }
+    })
+  } catch (e) {
+    res.json({ message: "Fail", detail: "Exception", info: e })
+  }
+}
+
 ctrl.previsualizarDiplomaSegunPadron = async (req, res) => {
   try {
     const file = req.file
@@ -136,7 +163,7 @@ ctrl.previsualizarDiplomaSegunPadron = async (req, res) => {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename=diploma.pdf'
       })
-      generatePdf(data[0], res)
+      generatePdf(data[0], res, true)
     }
   } catch (e) {
     res.json({ message: "Fail", detail: "Exception" })
@@ -162,7 +189,7 @@ ctrl.previsualizarDiploma = async (req, res) => {
           'Content-Type': 'application/pdf',
           'Content-Disposition': 'attachment; filename=diploma.pdf'
         })
-        generatePdf(padron, res)
+        generatePdf(padron, res, true)
       }
     })
   } catch (e) {
