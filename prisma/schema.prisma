@@ -13,17 +13,6 @@ model Usuarios {
   nombres   String @db.VarChar(50)
   password  String @db.VarChar(255)
   cargo     Cargos
-  diplomas  Diplomas[]
-}
-
-model Diplomas {
-  registro          String @id
-  dniUsuario        Int
-  dniPadron         Int
-  codigoEstudiante  Int
-  grado             String @db.VarChar(30)
-  facultad          String @db.VarChar(60)
-  Usuario           Usuarios @relation(fields: [dniUsuario], references: [dni])
 }
 
 model Padrones {
@@ -49,9 +38,15 @@ model Padrones {
   REG_FOLIO           String
   COD_ALU             String
   dniAct              Int
+  estado              Estados @default(NO)
 }
 
 enum Cargos {
   ADMIN
   GENERADOR
+}
+
+enum Estados {
+  SI
+  NO
 }
