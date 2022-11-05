@@ -82,37 +82,19 @@ ctrl.update = (req, res) => {
       if (error) {
         res.json({ message: "Fail", detail: "Token inválido" })
       } else {
-        const {
-          REG_REGISTRO,
-          FEC_RESO_CU,
-          RESO_NUM,
-          DEN_GRAD,
-          APEPAT,
-          APEMAT,
-          NOMBRE,
-          FAC_NOM,
-          F_FEC_CON_FAC_ESC,
-          DIPL_FEC,
-          COD_UNIV,
-          DOCU_TIP,
-          DOCU_NUM,
-          ABRE_GYT,
-          MOD_OBT,
-          MOD_EST,
-          RESO_FEC,
-          DIPL_TIP_EMI,
-          REG_LIBRO,
-          COD_ALU,
-          dniAct
-        } = req.body
         const { registro } = req.query
-        await prisma.padrones.update({
+        const padron = await prisma.padrones.updateMany({
           where: {
-            REG_REGISTRO: registro
+            REG_REGISTRO: registro,
+            estado: "NO"
           },
-          data: req.body
+          data: { ...req.body, estado: "NO"}
         })
-        res.json({ message: "Success", detail: "Se ha actualizado el padrón" })
+        if (padron.count == 0) {
+          res.json({ message: "Fail", detail: "No se actualizó la información del padrón" })
+        } else {
+          res.json({ message: "Success", detail: "Se ha actualizado el padrón" })
+        }
       }
     })
   } catch (e) {
@@ -120,6 +102,34 @@ ctrl.update = (req, res) => {
   }
 }
 
+ctrl.reiniciarEstado = (req, res) => {
+  try {
+    //  Validar token (si está logeado)
+    jwt.verify(req.header("Authorization"), process.env.JWT_KEY, async (error, user) => {
+      if (error) {
+        res.json({ message: "Fail", detail: "Token inválido" })
+      } else {
+        //  Validar que sea de cargo ADMIN
+        if (user.cargo == "ADMIN") {
+          const { registro } = req.query
+          await prisma.padrones.update({
+            where: {
+              REG_REGISTRO: registro
+            },
+            data: {
+              estado: "NO"
+            }
+          })
+          res.json({ message: "Success", detail: "Estado restaurado a no generado" })
+        } else {
+          res.json({ message: "Fail", detail: "No tiene permisos para realizar esta acción" })
+        }
+      }
+    })
+  } catch (e) {
+    res.json({ message: "Fail", detail: "Exception", info: e })
+  }
+}
 ctrl.deleteOne = (req, res) => {
   try {
     //  Validar token (si está logeado)
@@ -190,6 +200,35 @@ ctrl.previsualizarDiploma = async (req, res) => {
           'Content-Disposition': 'attachment; filename=diploma.pdf'
         })
         generatePdf(padron, res, true)
+      }
+    })
+  } catch (e) {
+    res.json({ message: "Fail", detail: "Exception" })
+  }
+}
+
+ctrl.generarDiploma = async (req, res) => {
+  try {
+    jwt.verify(req.header("Authorization"), process.env.JWT_KEY, async (error, user) => {
+      if (error) {
+        res.json({ message: "Fail", detail: "Token inválido" })
+      } else {
+        const {
+          registro
+        } = req.query
+        //  Actualizar estado del diploma
+        const padron = await prisma.padrones.update({
+          where: {
+            REG_REGISTRO: registro
+          },
+          data: { ...req.body, estado: "SI"}
+        })
+        //  Cabecera de la respuesta y generación del pdf
+        res.writeHead(200, {
+          'Content-Type': 'application/pdf',
+          'Content-Disposition': 'attachment; filename=diploma.pdf'
+        })
+        generatePdf(padron, res, false)
       }
     })
   } catch (e) {
