@@ -12,6 +12,8 @@ router.post("/generateFromExcel", upload, controller.generate)
 
 router.put("/update", controller.update)
 
+router.put("/restart", controller.reiniciarEstado)
+
 router.delete("/deletePadron", controller.deleteOne)
 
 router.post("/loadPadron", upload)
@@ -19,5 +21,7 @@ router.post("/loadPadron", upload)
 router.post("/previsualizarDiplomaSegunPadron", upload, controller.previsualizarDiplomaSegunPadron)
 
 router.post("/previsualizarDiploma", controller.previsualizarDiploma)
+
+router.post("/generarDiploma", controller.generarDiploma)
 
 export default router
