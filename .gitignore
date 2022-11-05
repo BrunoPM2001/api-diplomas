@@ -1,3 +1,6 @@
 node_modules
 manifiestos
 .env
+# Archivos estáticos
+public/formato.jpg
+public/formato_vacio.jpg
