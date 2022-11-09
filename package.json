@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "build": "pnpm install && pnpm prisma db push",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
