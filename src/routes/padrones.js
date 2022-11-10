@@ -16,8 +16,6 @@ router.put("/restart", controller.reiniciarEstado)
 
 router.delete("/deletePadron", controller.deleteOne)
 
-router.post("/loadPadron", upload)
-
 router.post("/previsualizarDiplomaSegunPadron", upload, controller.previsualizarDiplomaSegunPadron)
 
 router.post("/previsualizarDiploma", controller.previsualizarDiploma)
