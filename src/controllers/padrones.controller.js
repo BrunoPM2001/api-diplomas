@@ -130,6 +130,7 @@ ctrl.reiniciarEstado = (req, res) => {
     res.json({ message: "Fail", detail: "Exception", info: e })
   }
 }
+
 ctrl.deleteOne = (req, res) => {
   try {
     //  Validar token (si está logeado)
