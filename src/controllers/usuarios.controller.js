@@ -6,7 +6,6 @@ const prisma = new PrismaClient()
 
 const ctrl = {}
 
-//  Crear usuario
 ctrl.create = (req, res) => {
   try {
     //  Validar token (si está logeado)
@@ -42,7 +41,6 @@ ctrl.create = (req, res) => {
   }
 }
 
-//  Obtener todos los usuarios
 ctrl.getAll = async (req, res) => {
   try {
     //  Validar token (si está logeado)
