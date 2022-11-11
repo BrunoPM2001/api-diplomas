@@ -99,7 +99,7 @@ const generatePdf = (data, res, prev) => {
       .text(printEst1(DEN_GRAD), {
         align: 'center'
       })
-      .moveDown(1.1)
+      .moveDown(1.05)
     //  Datos del egresado
     doc
       .font('public/fonts/upcli.ttf', 28)
