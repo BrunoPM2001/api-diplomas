@@ -19,7 +19,7 @@ model Usuarios {
 
 model Padrones {
   REG_REGISTRO        String @id
-  FEC_RESO_CU          String
+  FEC_RESO_CU         String
   RESO_NUM            String
   DEN_GRAD            String
   APEPAT              String
