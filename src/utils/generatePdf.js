@@ -78,7 +78,7 @@ const generatePdf = (data, res, prev) => {
   doc.pipe(res)
 
   //  Cara delantera
-  doc.addPage({ margins: { left: 45, right: 45, top: 55, bottom: 25 } })
+  doc.addPage({ margins: { left: 40, right: 40, top: 55, bottom: 5 } })
 //  doc.image('public/formato.jpg', 0, 0, { width: doc.page.width, height: doc.page.height })
 //  doc.image('public/formato_vacio.jpg', 0, 0, { width: doc.page.width, height: doc.page.height })
 
@@ -167,9 +167,9 @@ const generatePdf = (data, res, prev) => {
 
   //  Firmas de autoridades actuales
   doc.lineWidth(0.25)
-  doc.rect(48, 665, 163, 0.5).stroke('#222222')
-  doc.rect(416, 665, 150, 0.5).stroke('#222222')
-  doc.rect(233, 712, 150, 0.5).stroke('#222222')
+  doc.rect(48, 680, 163, 0.5).stroke('#222222')
+  doc.rect(416, 680, 150, 0.5).stroke('#222222')
+  doc.rect(233, 727, 150, 0.5).stroke('#222222')
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
