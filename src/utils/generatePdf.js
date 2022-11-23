@@ -78,7 +78,7 @@ const generatePdf = (data, res, prev) => {
   doc.pipe(res)
 
   //  Cara delantera
-  doc.addPage({ margins: { left: 40, right: 40, top: 55, bottom: 5 } })
+  doc.addPage({ margins: { left: 40, right: 40, top: 60, bottom: 5 } })
 //  doc.image('public/formato.jpg', 0, 0, { width: doc.page.width, height: doc.page.height })
 //  doc.image('public/formato_vacio.jpg', 0, 0, { width: doc.page.width, height: doc.page.height })
 
@@ -154,12 +154,12 @@ const generatePdf = (data, res, prev) => {
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Le expide el presente Diploma para que se le reconozca como tal.", 48, altura + 325)
+    .text("Le expide el presente Diploma para que se le reconozca como tal.", 48, altura + 315)
 
   //  Fecha del diploma, posición variada
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Dado y firmado en La Cantuta - Chosica,", 48, altura + 345)
+    .text("Dado y firmado en La Cantuta - Chosica,", 48, altura + 335)
     .font('public/fonts/upcli.ttf', 18)
     .text(DIPL_FEC.split('/')[0] + ' DE ' + 
       getMonth(DIPL_FEC.split('/')[1]) + ' DEL ' +
@@ -167,9 +167,9 @@ const generatePdf = (data, res, prev) => {
 
   //  Firmas de autoridades actuales
   doc.lineWidth(0.25)
-  doc.rect(48, 680, 163, 0.5).stroke('#222222')
-  doc.rect(416, 680, 150, 0.5).stroke('#222222')
-  doc.rect(233, 727, 150, 0.5).stroke('#222222')
+  doc.rect(48, 690, 163, 0.5).stroke('#222222')
+  doc.rect(416, 690, 150, 0.5).stroke('#222222')
+  doc.rect(233, 737, 150, 0.5).stroke('#222222')
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
