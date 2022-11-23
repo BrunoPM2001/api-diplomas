@@ -3,7 +3,7 @@ import xlsx from 'xlsx'
 import PDF from 'pdfkit'
 
 // Altura inicial del diploma en la primera cara
-const altura = 250
+const altura = 260
 
 //  Convertir un número de mes a mes escrito en letras
 const getMonth = (number) => {
@@ -173,17 +173,17 @@ const generatePdf = (data, res, prev) => {
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Dra. Lida Violeta Asencios Trujillo", 48, altura + 425)
-    .text("Rectora", 108, altura + 437)
+    .text("Dra. Lida Violeta Asencios Trujillo", 48, altura + 435)
+    .text("Rectora", 108, altura + 447)
     .text("Dra. Rubén José Mora Santiago", {
       align: 'right'      
-    }, altura + 425)
-    .text("Decano", 475, altura + 437)
-    .text("", 48, 470)
+    }, altura + 435)
+    .text("Decano", 475, altura + 447)
+    .text("", 48, 480)
     .text("Mtra. Anita Luz Chacón Ayala", {
       align: 'center'
-    }, altura + 470)
-    .text("Secretaria general (e)", 260, altura + 483)
+    }, altura + 480)
+    .text("Secretaria general (e)", 260, altura + 493)
 
 
   doc.addPage({ margins: { left: 45, right: 45, top: 55, bottom: 45 } })
