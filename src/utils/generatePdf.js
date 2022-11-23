@@ -4,7 +4,7 @@ import PDF from 'pdfkit'
 
 // Altura inicial del diploma en la primera cara
 const altura = 260
-const altura2 = 24
+const altura2 = 15
 
 //  Convertir un número de mes a mes escrito en letras
 const getMonth = (number) => {
