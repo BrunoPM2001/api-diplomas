@@ -4,6 +4,7 @@ import PDF from 'pdfkit'
 
 // Altura inicial del diploma en la primera cara
 const altura = 260
+const altura2 = 24
 
 //  Convertir un número de mes a mes escrito en letras
 const getMonth = (number) => {
@@ -186,77 +187,79 @@ const generatePdf = (data, res, prev) => {
     .text("Secretaria general (e)", 260, altura + 493)
 
 
-  doc.addPage({ margins: { left: 45, right: 45, top: 30, bottom: 45 } })
 
+  
+  doc.addPage({ margins: { left: 45, right: 45, top: 30, bottom: 45 } })
   doc.fillColor('#222222')
+
   //  Segunda cara
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Código de la universidad:", 48, 48)
+    .text("Código de la universidad:", 48, altura2)
     .font('public/fonts/upcli.ttf', 13)
-    .text(COD_UNIV, 168, 49)
+    .text(COD_UNIV, 168, altura2 + 1)
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Tipo de documento:", 48, 68)
+    .text("Tipo de documento:", 48, altura2 +20)
     .font('public/fonts/upcli.ttf', 13)
-    .text(DOCU_TIP, 142, 69)
+    .text(DOCU_TIP, 142, altura2 + 21)
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("N°:", 160, 68)
+    .text("N°:", 160, altura2 + 20)
     .font('public/fonts/upcli.ttf', 13)
-    .text(DOCU_NUM, 182, 69)
+    .text(DOCU_NUM, 182, altura2 + 21)
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Abreviatura de grado: ", 48, 88)
+    .text("Abreviatura de grado: ", 48, altura2 + 40)
     .font('public/fonts/upcli.ttf', 13)
-    .text(ABRE_GYT, 152, 89)
+    .text(ABRE_GYT, 152, altura2 + 41)
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("El grado lo obtuvo por: ", 48, 108)
+    .text("El grado lo obtuvo por: ", 48, altura2 + 60)
     .font('public/fonts/upcli.ttf', 13)
-    .text(MOD_OBT, 158, 109)
+    .text(MOD_OBT, 158, altura2 + 61)
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Modalidad de estudios: ", 48, 128)
+    .text("Modalidad de estudios: ", 48, altura2 + 80)
     .font('public/fonts/upcli.ttf', 13)
-    .text(MOD_EST, 160, 129)
+    .text(MOD_EST, 160, altura2 + 81)
   
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Número de resolución: ", 48, 148)
+    .text("Número de resolución: ", 48, altura2 + 100)
     .font('public/fonts/upcli.ttf', 13)
-    .text(RESO_NUM, 152, 149)
+    .text(RESO_NUM, 152, altura2 + 101)
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Fecha de resolución: ", 48, 168)
+    .text("Fecha de resolución: ", 48, altura2 + 120)
     .font('public/fonts/upcli.ttf', 13)
-    .text(RESO_FEC, 145, 169)
+    .text(RESO_FEC, 145, altura2 + 121)
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Tipo de emisión: ", 48, 188)
+    .text("Tipo de emisión: ", 48, altura2 + 140)
     .font('public/fonts/upcli.ttf', 13)
-    .text(DIPL_TIP_EMI, 128, 189)
+    .text(DIPL_TIP_EMI, 128, altura2 + 141)
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Registrado en el libro: ", 48, 208)
+    .text("Registrado en el libro: ", 48, altura2 + 160)
     .font('public/fonts/upcli.ttf', 13)
-    .text(REG_LIBRO, 152, 209)
+    .text(REG_LIBRO, 152, altura2 + 161)
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Registrado en el folio: ", 48, 228)
+    .text("Registrado en el folio: ", 48, altura2 + 180)
     .font('public/fonts/upcli.ttf', 13)
-    .text(REG_FOLIO, 152, 229)
+    .text(REG_FOLIO, 152, altura2 + 181)
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Registrado de diploma: ", 48, 248)
+    .text("Registrado de diploma: ", 48, altura2 + 200)
 
   //  Firma de la directora de registro
   doc.lineWidth(0.25)
