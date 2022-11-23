@@ -138,32 +138,32 @@ const generatePdf = (data, res, prev) => {
     .font('public/fonts/upcli.ttf', 23)
     .text(FAC_NOM, {
       align: 'center'
-    }, altura + 243)
+    }, altura + 245)
 
   //  Consejo de facultad o escuela, las posiciones de los valores de las fechas varían
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("con fecha", 48, altura + 270)
+    .text("con fecha", 48, altura + 275)
     .font('public/fonts/upcli.ttf', 18)
     .text(F_FEC_CON_FAC_ESC.split('/')[0] + ' DE ' +
         getMonth(F_FEC_CON_FAC_ESC.split('/')[1]) + ' DEL ' +
-        F_FEC_CON_FAC_ESC.split('/')[2], 95, altura + 268)
+        F_FEC_CON_FAC_ESC.split('/')[2], 95, altura + 273)
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Por tanto:", 48, altura + 295)
+    .text("Por tanto:", 48, altura + 300)
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Le expide el presente Diploma para que se le reconozca como tal.", 48, altura + 315)
+    .text("Le expide el presente Diploma para que se le reconozca como tal.", 48, altura + 320)
 
   //  Fecha del diploma, posición variada
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Dado y firmado en La Cantuta - Chosica,", 48, altura + 335)
+    .text("Dado y firmado en La Cantuta - Chosica,", 48, altura + 340)
     .font('public/fonts/upcli.ttf', 18)
     .text(DIPL_FEC.split('/')[0] + ' DE ' + 
       getMonth(DIPL_FEC.split('/')[1]) + ' DEL ' +
-      DIPL_FEC.split('/')[2], 243, altura + 343)
+      DIPL_FEC.split('/')[2], 243, altura + 338)
 
   //  Firmas de autoridades actuales
   doc.lineWidth(0.25)
