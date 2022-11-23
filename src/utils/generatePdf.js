@@ -186,7 +186,7 @@ const generatePdf = (data, res, prev) => {
     .text("Secretaria general (e)", 260, altura + 493)
 
 
-  doc.addPage({ margins: { left: 45, right: 45, top: 55, bottom: 45 } })
+  doc.addPage({ margins: { left: 45, right: 45, top: 30, bottom: 45 } })
 
   doc.fillColor('#222222')
   //  Segunda cara
