@@ -78,7 +78,7 @@ const generatePdf = (data, res, prev) => {
   doc.pipe(res)
 
   //  Cara delantera
-  doc.addPage({ margins: { left: 48, right: 48, top: 55, bottom: 45 } })
+  doc.addPage({ margins: { left: 45, right: 45, top: 55, bottom: 25 } })
 //  doc.image('public/formato.jpg', 0, 0, { width: doc.page.width, height: doc.page.height })
 //  doc.image('public/formato_vacio.jpg', 0, 0, { width: doc.page.width, height: doc.page.height })
 
@@ -173,20 +173,20 @@ const generatePdf = (data, res, prev) => {
 
   doc
     .font('public/fonts/mtcorsva.ttf', 13)
-    .text("Dra. Lida Violeta Asencios Trujillo", 48, altura + 420)
-    .text("Rectora", 108, altura + 432)
+    .text("Dra. Lida Violeta Asencios Trujillo", 48, altura + 425)
+    .text("Rectora", 108, altura + 437)
     .text("Dra. Rubén José Mora Santiago", {
       align: 'right'      
-    }, altura + 420)
-    .text("Decano", 475, altura + 432)
-    .text("", 48, 465)
+    }, altura + 425)
+    .text("Decano", 475, altura + 437)
+    .text("", 48, 470)
     .text("Mtra. Anita Luz Chacón Ayala", {
       align: 'center'
-    }, altura + 465)
-    .text("Secretaria general (e)", 260, altura + 478)
+    }, altura + 470)
+    .text("Secretaria general (e)", 260, altura + 483)
 
 
-  doc.addPage({ margins: { left: 48, right: 48, top: 55, bottom: 45 } })
+  doc.addPage({ margins: { left: 45, right: 45, top: 55, bottom: 45 } })
 
   doc.fillColor('#222222')
   //  Segunda cara
