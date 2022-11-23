@@ -20,6 +20,6 @@ router.post("/previsualizarDiplomaSegunPadron", upload, controller.previsualizar
 
 router.post("/previsualizarDiploma", controller.previsualizarDiploma)
 
-router.post("/generarDiploma", controller.generarDiploma)
+router.put("/generarDiploma", controller.generarDiploma)
 
 export default router
